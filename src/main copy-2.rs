@@ -62,19 +62,11 @@ fn main() {
         department: String::from("HR"),
     });
 
-    for user in users.iter() {
-        print!("ID: {} ชื่อ: {} -> ", user.id, user.name);
+    println!("ตอนนี้มีหนังสือทั้งหมด: {:?}", books[0].title);
 
-        match user.status {
-            UserStatus::Active => println!("สถานะ: Active"),
-            UserStatus::Offline => println!("สถานะ: Offline"),
-            UserStatus::Busy => println!("สถานะ: Busy"),
-            UserStatus::Away => println!("สถานะ: Away"),
-            UserStatus::Working => println!("สถานะ: Working"),
-            _ => println!("สถานะ: ไม่ทราบ"),
-        }
-    }
-
+    println!("ตอนนี้มีพนักงานทั้งหมด: {:?}", users[2]);
+    
+    println!("จำนวนพนักงาน: {} คน", users.len());
 
 
 }
