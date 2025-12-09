@@ -10,7 +10,7 @@ enum UserStatus {
 #[derive(Debug)]
 enum BookStatus {
     Available,
-    Borrowed(u64),   
+    Borrowed,   
 }
 
 #[derive(Debug)]
@@ -37,16 +37,15 @@ impl User {
 }
 
 impl Book {
-    fn borrow(&mut self, user_id: u64) -> bool {
-       match self.status {
+    fn borrow(&mut self) -> bool {
+        match self.status {
             BookStatus::Available => {
-                self.status = BookStatus::Borrowed(user_id);
-                print!("User ID {} ", user_id);
-                true
+                self.status = BookStatus::Borrowed;
+                true    
             },
-            BookStatus::Borrowed(_) => false,
-       }
-       
+            BookStatus::Borrowed => false,
+            
+        }
     }
 }
 
@@ -69,25 +68,18 @@ fn main() {
         department: String::from("Engineering"),
     });
 
-    let is_successfull = books[0].borrow(users[0].id);
+    let is_successfull = books[0].borrow();
     if is_successfull {
         println!("ยืมหนังสือสำเร็จ {}", books[0].title);
     } else {
         println!("หนังสือถูกยืมไปแล้ว {}", books[0].title);
     }
 
-    let is_successfull = books[0].borrow(users[0].id);
+    let is_successfull = books[0].borrow();
     if is_successfull {
-        println!("ยืมหนังสือสำเร็จ {} ", books[0].title);
+        println!("ยืมหนังสือสำเร็จ {}", books[0].title);
     } else {
         println!("หนังสือถูกยืมไปแล้ว {}", books[0].title);
-
-        match &books[0].status {
-            BookStatus::Borrowed(user_id) => {
-                println!("หนังสือถูกยืมโดย User ID: {}", user_id);
-            }
-            _ => println!("สถานะหนังสือไม่ทราบ"),
-        }
     }
 
     
